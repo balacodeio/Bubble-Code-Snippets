@@ -1,0 +1,103 @@
+{
+	//Create & Maintained By BalaHeadache Ali Farahat
+
+	"Bubble - Load data from instance": {
+		"prefix": "Bjs-loadDataInstance",
+		"body": "let $1 = instance.data.$1;",
+		"description": "Loads a Bubble instance in to a variable"
+	},
+	"Bubble - Add data to an instance": {
+		"prefix": "Bjs-addDataInstance",
+		"body": "instance.data.$1 = let $1;",
+		"description": "Loads a Bubble instance in to a variable"
+	},
+	"Bubble - Load property to variable": {
+		"prefix": "Bjs-loadProperty",
+		"body": "let $1 = properties.$1;",
+		"description": "Loads a Bubble instance in to a variable"
+	},
+	"Bubble - Publish State": {
+		"prefix": "Bjs-publishState",
+		"body": [
+			"//Usage - instance.publishState(string: Exposed state name, Value);",
+			"instance.publishState('$1',$2);"
+		],
+		"description": "Update a publish state"
+	},
+	"Bubble - Trigger Event": {
+		"prefix": "Bjs-triggerEvent",
+		"body": [
+			"//Usage - instance.triggerEvent(string: Event's name);",
+			"instance.triggerEvent('$1');"
+		],
+		"description": "Trigger an event"
+	},
+	"Bubble - Upload File": {
+		"prefix": "Bjs-uploadFile",
+		"body": [
+			"//function uplodfile callback",
+			"function uploadFileCallback(err, url) {",
+			"\tif (url) {",
+			"\t\t//If the returned url it available",
+			"\t\t//Do something...",
+			"\t\t//Example instance.publishState(string: Exposed state name, Value);",
+			"\t} else {",
+			"\t\t//Error returned",
+			"\t\tconsole.log(err.toString());",
+			"\t}",
+			"}",
+			"",
+			"",
+			"//Usage - uploadFile(string: fileName, string: Base64 data, attachTo: A thing in Bubble [OPTIONAL])",
+			"function uploadFile(fileName, base64, attachTo) {",
+			"\tif (attachTo) {",
+			"\t\tcontext.uploadContent(fileName, base64, uploadFileCallback, attachTo);",
+			"\t} else {",
+			"\t\tcontext.uploadContent(fileName, base64, uploadFileCallback);",
+			"\t}",
+			"}"
+		],
+		"description": "Upload data to Bubble with optional attachment"
+	},
+	"Bubble - Strip Base64 Type": {
+		"prefix": "Bjs-stripBase64Type",
+		"body": [
+			"let base64Headless = $1.substr($1.indexOf(',') + 1);"
+		],
+		"description": "Removes the type from a base64 string"
+	},
+	"Bubble - Initialize States": {
+		"prefix": "Bjs-initializeStates",
+		"body": [
+			"let state = '$1'",
+			"return state;"
+		],
+		"description": "Add's a default  Initialize state syntax (EXAMPLE)"
+	},
+	"Ensures that a function is only excuted once using Bubble's instance.data object": {
+		"prefix": "Bjs-runOnceFunction",
+		"body": [
+			"//Bubble - runOnce function",
+			"const ${1:runOnce}= (function() {",
+			"  let executed = false;",
+			"  return function() {",
+			"    if (!executed) {",
+			"      executed = true;",
+			"      //Do something",
+			"    }",
+			"  };",
+			"})();",
+			"",
+			"",
+			"//Bubble - Execute runOnce Function",
+			"//Check in the Bubble instance is undefined (function did not run yet)",
+			"if (instance.data.${1:runOnce}=== undefined) {",
+			"  //Create the Bubble instance",
+			"  instance.data.${1:runOnce} = ${1:runOnce};",
+			"  //Run the function",
+			"  ${1:runOnce}();",
+			"}"
+		],
+		"description": "Ensures that a function is only run once using Bubble's instance.data object"
+	}
+}

@@ -1,2 +1,3 @@
-# Bubble-VS-Code-Snippets
-A collection of visual studio code snippets, examples and possibly mush more...
+# Bubble-Code-Snippets
+
+This is a growing collection of Bubble.is code snippets that are created and shared by users like you!.  The snippets are created to extend the Bubble app functionality.  So look around and enjoy!
