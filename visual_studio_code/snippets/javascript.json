@@ -1,6 +1,4 @@
 {
-	//Create & Maintained By BalaHeadache Ali Farahat
-
 	"Bubble - Load data from instance": {
 		"prefix": "Bjs-loadDataInstance",
 		"body": "let $1 = instance.data.$1;",
@@ -99,5 +97,67 @@
 			"}"
 		],
 		"description": "Ensures that a function is only run once using Bubble's instance.data object"
-	}
+	},
+	"Bubble - Get progress bar value": {
+		"prefix": "Bjs-progressBarValue",
+		"body": [
+		  "//Get Bubble progress bar value",
+		  "function getBubbleProgress() {",
+		  "  if (document.getElementById('nprogress')) {",
+		  "    let pWidth = Number($(window).width());",
+		  "    let pProgress = Number(",
+		  "      $('#nprogress')",
+		  "        .children('.bar')",
+		  "        .css('transform')",
+		  "        .split(',')[4]",
+		  "    );",
+		  "    let pResult = pProgress / pWidth;",
+		  "    //Results are returned as a decimal",
+		  "    pResult = pResult + 1;",
+		  "    pResult = pResult.toFixed(2);",
+		  "    return pResult;",
+		  "  }",
+		  "}"
+		],
+		"description": "Bubble - Get progress bar value"
+	  },
+	  "Misc - Wait for an element to be created": {
+		"prefix": "Mjs-waitForElement",
+		"body": [
+		  "//Waits for an element to be created",
+		  "// Credit Paul Kinlan https://paul.kinlan.me/waiting-for-an-element-to-be-created/",
+		  "function waitForElement(selector) {",
+		  "  return new Promise(function(resolve, reject) {",
+		  "    var element = document.querySelector(selector);",
+		  "",
+		  "    if(element) {",
+		  "      resolve(element);",
+		  "      return;",
+		  "    }",
+		  "",
+		  "    var observer = new MutationObserver(function(mutations) {",
+		  "      mutations.forEach(function(mutation) {",
+		  "        var nodes = Array.from(mutation.addedNodes);",
+		  "        for(var node of nodes) {",
+		  "          if(node.matches && node.matches(selector)) {",
+		  "            observer.disconnect();",
+		  "            resolve(node);",
+		  "            return;",
+		  "          }",
+		  "        };",
+		  "      });",
+		  "    });",
+		  "",
+		  "    observer.observe(document.documentElement, { childList: true, subtree: true });",
+		  "  });",
+		  "}",
+		  "",
+		  "//Usage",
+		  "waitForElement(\"#test\").then(function(element) {",
+		  "    //Do something",
+		  "    console.log(\"Element Added\", element);",
+		  "});"
+		],
+		"description": "Misc - Wait for an element to be created"
+	  }
 }
