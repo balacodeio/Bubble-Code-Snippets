@@ -1,4 +1,7 @@
 {
+	//Maintained By BalaHeadache Ali Farahat
+	//Contibute by visiting
+
 	"Bubble - Load data from instance": {
 		"prefix": "Bjs-loadDataInstance",
 		"body": "let $1 = instance.data.$1;",
@@ -72,7 +75,7 @@
 		],
 		"description": "Add's a default  Initialize state syntax (EXAMPLE)"
 	},
-	"Ensures that a function is only excuted once using Bubble's instance.data object": {
+	"Bubble - Function run once": {
 		"prefix": "Bjs-runOnceFunction",
 		"body": [
 			"//Bubble - runOnce function",
