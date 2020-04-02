@@ -1,7 +1,6 @@
 {
 	//Maintained By BalaHeadache Ali Farahat
 	//Contibute by visiting
-
 	"Bubble - Load data from instance": {
 		"prefix": "Bjs-loadDataInstance",
 		"body": "let $1 = instance.data.$1;",
@@ -9,7 +8,7 @@
 	},
 	"Bubble - Add data to an instance": {
 		"prefix": "Bjs-addDataInstance",
-		"body": "instance.data.$1 = let $1;",
+		"body": "instance.data.$1 = $1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Load property to variable": {
@@ -104,63 +103,202 @@
 	"Bubble - Get progress bar value": {
 		"prefix": "Bjs-progressBarValue",
 		"body": [
-		  "//Get Bubble progress bar value",
-		  "function getBubbleProgress() {",
-		  "  if (document.getElementById('nprogress')) {",
-		  "    let pWidth = Number($(window).width());",
-		  "    let pProgress = Number(",
-		  "      $('#nprogress')",
-		  "        .children('.bar')",
-		  "        .css('transform')",
-		  "        .split(',')[4]",
-		  "    );",
-		  "    let pResult = pProgress / pWidth;",
-		  "    //Results are returned as a decimal",
-		  "    pResult = pResult + 1;",
-		  "    pResult = pResult.toFixed(2);",
-		  "    return pResult;",
-		  "  }",
-		  "}"
+			"//Get Bubble progress bar value",
+			"function getBubbleProgress() {",
+			"  if (document.getElementById('nprogress')) {",
+			"    let pWidth = Number($(window).width());",
+			"    let pProgress = Number(",
+			"      $('#nprogress')",
+			"        .children('.bar')",
+			"        .css('transform')",
+			"        .split(',')[4]",
+			"    );",
+			"    let pResult = pProgress / pWidth;",
+			"    //Results are returned as a decimal",
+			"    pResult = pResult + 1;",
+			"    pResult = pResult.toFixed(2);",
+			"    return pResult;",
+			"  }",
+			"}"
 		],
 		"description": "Bubble - Get progress bar value"
-	  },
-	  "Misc - Wait for an element to be created": {
+	},
+	"Misc - Wait for an element to be created": {
 		"prefix": "Mjs-waitForElement",
 		"body": [
-		  "//Waits for an element to be created",
-		  "// Credit Paul Kinlan https://paul.kinlan.me/waiting-for-an-element-to-be-created/",
-		  "function waitForElement(selector) {",
-		  "  return new Promise(function(resolve, reject) {",
-		  "    var element = document.querySelector(selector);",
-		  "",
-		  "    if(element) {",
-		  "      resolve(element);",
-		  "      return;",
-		  "    }",
-		  "",
-		  "    var observer = new MutationObserver(function(mutations) {",
-		  "      mutations.forEach(function(mutation) {",
-		  "        var nodes = Array.from(mutation.addedNodes);",
-		  "        for(var node of nodes) {",
-		  "          if(node.matches && node.matches(selector)) {",
-		  "            observer.disconnect();",
-		  "            resolve(node);",
-		  "            return;",
-		  "          }",
-		  "        };",
-		  "      });",
-		  "    });",
-		  "",
-		  "    observer.observe(document.documentElement, { childList: true, subtree: true });",
-		  "  });",
-		  "}",
-		  "",
-		  "//Usage",
-		  "waitForElement(\"#test\").then(function(element) {",
-		  "    //Do something",
-		  "    console.log(\"Element Added\", element);",
-		  "});"
+			"//Waits for an element to be created",
+			"// Credit Paul Kinlan https://paul.kinlan.me/waiting-for-an-element-to-be-created/",
+			"function waitForElement(selector) {",
+			"  return new Promise(function(resolve, reject) {",
+			"    var element = document.querySelector(selector);",
+			"",
+			"    if(element) {",
+			"      resolve(element);",
+			"      return;",
+			"    }",
+			"",
+			"    var observer = new MutationObserver(function(mutations) {",
+			"      mutations.forEach(function(mutation) {",
+			"        var nodes = Array.from(mutation.addedNodes);",
+			"        for(var node of nodes) {",
+			"          if(node.matches && node.matches(selector)) {",
+			"            observer.disconnect();",
+			"            resolve(node);",
+			"            return;",
+			"          }",
+			"        };",
+			"      });",
+			"    });",
+			"",
+			"    observer.observe(document.documentElement, { childList: true, subtree: true });",
+			"  });",
+			"}",
+			"",
+			"//Usage",
+			"waitForElement(\"#test\").then(function(element) {",
+			"    //Do something",
+			"    console.log(\"Element Added\", element);",
+			"});"
 		],
 		"description": "Misc - Wait for an element to be created"
+	},
+	"Bubble - Publish auto binding": {
+		"prefix": "Bjs-publishAutoBinding",
+		"body": [
+			"//Usage - publishAutobinding: function(value)",
+			"instance.publishAutobinding(${1:'str'});"
+		],
+		"description": "Bubble - Publish auto binding"
+	},
+	"Misc - Append script": {
+		"prefix": "Mjq-appendScript",
+		"body": [
+			"//Adds a script to a tag",
+			"$('body').append('<script src=\"${1:URL}\" type=\"text/javascript\"></script>');"
+		],
+		"description": "Misc - Append script"
+	},
+	"Bubble - Get Context Key": {
+		"prefix": "Bjs-getContextKey",
+		"body": [
+			"//Get Bubble Dynamic List and store in a variable",
+			"let ${1:vKey} = context.keys['${2:Key name as string}'];"
+		],
+		"description": "Bubble - Get Context Key"
+	},
+	"Misc - Append a script only if it does not exist": {
+		"prefix": "Mjq-appendScriptNoneExist",
+		"body": [
+			"function ${1:appendScript}(${2:filepath}) {",
+			"    if ($('head script[src=\"' + filepath + '\"]').length > 0)",
+			"        return;",
+			"    var ele = document.createElement('script');",
+			"    ele.setAttribute('type', 'text/javascript');",
+			"    ele.setAttribute('src', filepath);",
+			"    $('head').append(ele);",
+			"}"
+		],
+		"description": "Misc - Append a script only if it does not exist"
+	},
+	"Misc - Append a style only if it does not exist": {
+		"prefix": "Mjq-appendStyleNoneExist",
+		"body": [
+			"function ${1:appendStyle}(${2:filepath}) {",
+			"    if ($('head link[href=\"' + filepath + '\"]').length > 0)",
+			"        return;",
+			"    var ele = document.createElement('link');",
+			"    ele.setAttribute('type', 'text/css');",
+			"    ele.setAttribute('rel', 'Stylesheet');",
+			"    ele.setAttribute('href', filepath);",
+			"    $('head').append(ele);",
+			"}"
+		],
+		"description": "Misc - Append a style only if it does not exist"
+	},
+	"Get the current scroll position of the vertical repeating group": {
+		"prefix": "Bjq-getScrollPositionVerticalRG",
+		"body": [
+			"function getScrollPosition() {",
+			"    //Add the ID of the repeating",
+			"    let elHeight = $('${1:#rg01}').find('.rows').height()",
+			"    //scroll position",
+			"    let sTop = $('${1:#rg01}').scrollTop();",
+			"    //Calculate how far are we down",
+			"    let cPosition = sTop / elHeight;",
+			"    //Returns a number",
+			"    return cPosition;",
+			"}"
+		],
+		"description": "Get the current scroll position of the vertical repeating group"
+	},
+	"Bubble - Get Dynamic List or Array as an array of objects": {
+		"prefix": "Bjs-getDynamicListArrayAsObjects",
+		"body": [
+			"let ${1:variableName};",
+			"properties.${2:propertyName} != null ? ${1:variableName} = properties.${2:propertyName}.get(0, properties.${2:propertyName}.length()) : ${1:variableName} = [];"
+		],
+		"description": "Bubble - Get Dynamic List or Array"
+	},
+	"Load a new keyword contrucor only once": {
+		"prefix": "Bjs-NewKeywordContructor",
+		"body": [
+		  "//Bubble Single Use New Constructor Keyword",
+		  "if (instance.data.${1:name} == undefined){",
+		  "    //Construct using new keyword",
+		  "    let ini_${1:name} = new ${2:constructorName};",
+		  "    //Assign contructor to instance for use anywhere in the plugin",
+		  "    instance.data.ini_${1:name} = ini_${1:name};",
+		  "}",
+		  "//Reload the new contruct in this instance",
+		  "let ${1:name} = instance.data.ini_${1:name};"
+		],
+		"description": "Load a new keyword contrucor only once"
+	  },
+	  "Bubble - Get Dynamic List or Array using Map Function": {
+		"prefix": "Bjs-GetDynamicListArrayMap",
+		"body": [
+		  "let items = []",
+		  "items = properties.${1:listName}.get( 0, properties.${1:listName}.length()).map( x => x.get(properties.${2:fieldName}) )"
+		],
+		"description": "Bubble - Get Dynamic List or Array using Map Function"
+	  },
+	  "Bubble - Get Dynamic List As Array Of Objects and cycle through": {
+		"prefix": "Bjs-GetDynamicListAsObjectArray",
+		"body": [
+		  "//This code get the list as an object which you can then iterate over",
+		  "let objToFetch =  properties.${1:list}.get( 0, properties.${1:list}.length());",
+		  "//Use this code if you need to examine the object length console.log('objToFetch',objToFetch.length);",
+		  "",
+		  "//Get and add variables to plugin",
+		  "objToFetch.forEach(e => {",
+		  "    let n = e.get(properties.variable_names);",
+		  "    let v = e.get(properties.variable_values);",
+		  "    //use this code to examine the results console.log('Variable Added','Vartiable Name:',n,'Variable Value:',v);",
+		  "});"
+		],
+		"description": "Bubble - Get Dynamic List As Array Of Objects and cycle through"
+	  },
+	  "Bubble - Initalize Boilerplate": {
+		"prefix": "Bjs-initalizeBoilerplate",
+		"body": [
+		  "  //Create unique ID of instance",
+		  "  let instanceid = (Math.random() * Math.pow(2, 54)).toString(36);",
+		  "",
+		  "  //Create the DIV & Append",
+		  "  let div;",
+		  "  div = $('<div class=\"${1:className}\" id=\"${2:ID}_\"' + instanceid + '\"</div>');",
+		  "  instance.canvas.append(div);",
+		  "",
+		  "  //Capture Parent div",
+		  "  let pluginDiv = $(div).parent();",
+		  "",
+		  "  //create instances",
+		  "  instance.data.instanceName = '${2:ID}_' + instanceid;",
+		  "  instance.data.instanceId = instanceid;",
+		  "  instance.data.instanceDiv = div;",
+		  "  instance.data.pluginDiv = pluginDiv;"
+		],
+		"description": "Bubble - Initalize Boilerplate"
 	  }
+
 }
