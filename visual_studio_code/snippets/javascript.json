@@ -1,23 +1,21 @@
 {
-	//Maintained By BalaHeadache Ali Farahat
-	//Contibute by visiting
 	"Bubble - Load data from instance": {
-		"prefix": "Bjs-loadDataInstance",
+		"prefix": "BJS-loadDataInstance",
 		"body": "let $1 = instance.data.$1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Add data to an instance": {
-		"prefix": "Bjs-addDataInstance",
+		"prefix": "BJS-addDataInstance",
 		"body": "instance.data.$1 = $1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Load property to variable": {
-		"prefix": "Bjs-loadProperty",
+		"prefix": "BJS-loadProperty",
 		"body": "let $1 = properties.$1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Publish State": {
-		"prefix": "Bjs-publishState",
+		"prefix": "BJS-publishState",
 		"body": [
 			"//Usage - instance.publishState(string: Exposed state name, Value);",
 			"instance.publishState('$1',$2);"
@@ -25,7 +23,7 @@
 		"description": "Update a publish state"
 	},
 	"Bubble - Trigger Event": {
-		"prefix": "Bjs-triggerEvent",
+		"prefix": "BJS-triggerEvent",
 		"body": [
 			"//Usage - instance.triggerEvent(string: Event's name);",
 			"instance.triggerEvent('$1');"
@@ -33,7 +31,7 @@
 		"description": "Trigger an event"
 	},
 	"Bubble - Upload File": {
-		"prefix": "Bjs-uploadFile",
+		"prefix": "BJS-uploadFile",
 		"body": [
 			"//function uplodfile callback",
 			"function uploadFileCallback(err, url) {",
@@ -60,14 +58,14 @@
 		"description": "Upload data to Bubble with optional attachment"
 	},
 	"Bubble - Strip Base64 Type": {
-		"prefix": "Bjs-stripBase64Type",
+		"prefix": "BJS-stripBase64Type",
 		"body": [
 			"let base64Headless = $1.substr($1.indexOf(',') + 1);"
 		],
 		"description": "Removes the type from a base64 string"
 	},
 	"Bubble - Initialize States": {
-		"prefix": "Bjs-initializeStates",
+		"prefix": "BJS-initializeStates",
 		"body": [
 			"let state = '$1'",
 			"return state;"
@@ -75,7 +73,7 @@
 		"description": "Add's a default  Initialize state syntax (EXAMPLE)"
 	},
 	"Bubble - Function run once": {
-		"prefix": "Bjs-runOnceFunction",
+		"prefix": "BJS-runOnceFunction",
 		"body": [
 			"//Bubble - runOnce function",
 			"const ${1:runOnce}= (function() {",
@@ -101,7 +99,7 @@
 		"description": "Ensures that a function is only run once using Bubble's instance.data object"
 	},
 	"Bubble - Get progress bar value": {
-		"prefix": "Bjs-progressBarValue",
+		"prefix": "BJS-progressBarValue",
 		"body": [
 			"//Get Bubble progress bar value",
 			"function getBubbleProgress() {",
@@ -163,7 +161,7 @@
 		"description": "Misc - Wait for an element to be created"
 	},
 	"Bubble - Publish auto binding": {
-		"prefix": "Bjs-publishAutoBinding",
+		"prefix": "BJS-publishAutoBinding",
 		"body": [
 			"//Usage - publishAutobinding: function(value)",
 			"instance.publishAutobinding(${1:'str'});"
@@ -179,7 +177,7 @@
 		"description": "Misc - Append script"
 	},
 	"Bubble - Get Context Key": {
-		"prefix": "Bjs-getContextKey",
+		"prefix": "BJS-getContextKey",
 		"body": [
 			"//Get Bubble Dynamic List and store in a variable",
 			"let ${1:vKey} = context.keys['${2:Key name as string}'];"
@@ -216,7 +214,7 @@
 		"description": "Misc - Append a style only if it does not exist"
 	},
 	"Get the current scroll position of the vertical repeating group": {
-		"prefix": "Bjq-getScrollPositionVerticalRG",
+		"prefix": "BubbleJQ-getScrollPositionVerticalRG",
 		"body": [
 			"function getScrollPosition() {",
 			"    //Add the ID of the repeating",
@@ -232,7 +230,7 @@
 		"description": "Get the current scroll position of the vertical repeating group"
 	},
 	"Bubble - Get Dynamic List or Array as an array of objects": {
-		"prefix": "Bjs-getDynamicListArrayAsObjects",
+		"prefix": "BJS-getDynamicListArrayAsObjects",
 		"body": [
 			"let ${1:variableName};",
 			"properties.${2:propertyName} != null ? ${1:variableName} = properties.${2:propertyName}.get(0, properties.${2:propertyName}.length()) : ${1:variableName} = [];"
@@ -240,7 +238,7 @@
 		"description": "Bubble - Get Dynamic List or Array"
 	},
 	"Load a new keyword contrucor only once": {
-		"prefix": "Bjs-NewKeywordContructor",
+		"prefix": "BJS-NewKeywordContructor",
 		"body": [
 		  "//Bubble Single Use New Constructor Keyword",
 		  "if (instance.data.${1:name} == undefined){",
@@ -255,7 +253,7 @@
 		"description": "Load a new keyword contrucor only once"
 	  },
 	  "Bubble - Get Dynamic List or Array using Map Function": {
-		"prefix": "Bjs-GetDynamicListArrayMap",
+		"prefix": "BJS-GetDynamicListArrayMap",
 		"body": [
 		  "let items = []",
 		  "items = properties.${1:listName}.get( 0, properties.${1:listName}.length()).map( x => x.get(properties.${2:fieldName}) )"
@@ -263,7 +261,7 @@
 		"description": "Bubble - Get Dynamic List or Array using Map Function"
 	  },
 	  "Bubble - Get Dynamic List As Array Of Objects and cycle through": {
-		"prefix": "Bjs-GetDynamicListAsObjectArray",
+		"prefix": "BJS-GetDynamicListAsObjectArray",
 		"body": [
 		  "//This code get the list as an object which you can then iterate over",
 		  "let objToFetch =  properties.${1:list}.get( 0, properties.${1:list}.length());",
@@ -279,7 +277,7 @@
 		"description": "Bubble - Get Dynamic List As Array Of Objects and cycle through"
 	  },
 	  "Bubble - Initalize Boilerplate": {
-		"prefix": "Bjs-initalizeBoilerplate",
+		"prefix": "BJS-initalizeBoilerplate",
 		"body": [
 		  "  //Create unique ID of instance",
 		  "  let instanceid = (Math.random() * Math.pow(2, 54)).toString(36);",
@@ -299,6 +297,24 @@
 		  "  instance.data.pluginDiv = pluginDiv;"
 		],
 		"description": "Bubble - Initalize Boilerplate"
+	  },
+	  "Adds advanced internal logging": {
+		"prefix": "BJS-internalLogging",
+		"body": [
+		  "  // Verbose logging",
+		  "  const verboseUser = context.keys['Verbose Logging'];",
+		  "  instance.data.vError = function(message, object = '', plugin = '${1:ProjectName}') {",
+		  "    console.log('%c ' + plugin + ' Error ', 'background: red; color: white; display: block; padding:2px', message, object); // eslint-disable-line no-console",
+		  "    context.reportDebugger(plugin + ' Error ' + message);",
+		  "  };",
+		  "",
+		  "  instance.data.vLog = function(message, object = '', plugin = '${1:ProjectName}') {",
+		  "    const verbose = verboseUser !== undefined || verboseUser !== '' || verboseUser != null ? verboseUser : false;",
+		  "    if (verbose === 'true' || verbose === 'yes' || verbose === true) {",
+		  "      console.log('%c ' + plugin + ' Log ', 'background: grey; color: white; display: block; padding:2px', message, object); // eslint-disable-line no-console",
+		  "    }",
+		  "  };"
+		],
+		"description": "Adds advanced internal logging"
 	  }
-
 }
