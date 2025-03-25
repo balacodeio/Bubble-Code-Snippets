@@ -1,21 +1,48 @@
 {
+	"Get a file and read its contents using Bubble context.async": {
+		"prefix": "Bubble.io getAPIContextAsync",
+		"body": [
+		  "const getFile = async (url) => {",
+		  "  try {",
+		  "    const response = await axios.get(url, { responseType: 'arraybuffer' });",
+		  "    const buffer = Buffer.from(response.data);",
+		  "    return buffer.toString('utf-8');",
+		  "  } catch (error) {",
+		  "    console.error('Error fetching file:', error);",
+		  "    throw error;",
+		  "  }",
+		  "};",
+		  "",
+		  "let execute = context.async(async (callback) => {",
+		  "  try {",
+		  "    let contents = await getFile('https://someFileURL.com/file.kml');",
+		  "    callback(null, contents);",
+		  "  } catch (error) {",
+		  "    callback(error);",
+		  "  }",
+		  "});",
+		  "",
+		  "let r = execute;"
+		],
+		"description": "Get a file and read its contents using Bubbel.io context.async"
+	  },
 	"Bubble - Load data from instance": {
-		"prefix": "BJS-loadDataInstance",
+		"prefix": "Bubble.io loadDataInstance",
 		"body": "let $1 = instance.data.$1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Add data to an instance": {
-		"prefix": "BJS-addDataInstance",
+		"prefix": "Bubble.io addDataInstance",
 		"body": "instance.data.$1 = $1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Load property to variable": {
-		"prefix": "BJS-loadProperty",
+		"prefix": "Bubble.io loadProperty",
 		"body": "let $1 = properties.$1;",
 		"description": "Loads a Bubble instance in to a variable"
 	},
 	"Bubble - Publish State": {
-		"prefix": "BJS-publishState",
+		"prefix": "Bubble.io publishState",
 		"body": [
 			"//Usage - instance.publishState(string: Exposed state name, Value);",
 			"instance.publishState('$1',$2);"
@@ -23,7 +50,7 @@
 		"description": "Update a publish state"
 	},
 	"Bubble - Trigger Event": {
-		"prefix": "BJS-triggerEvent",
+		"prefix": "Bubble.io triggerEvent",
 		"body": [
 			"//Usage - instance.triggerEvent(string: Event's name);",
 			"instance.triggerEvent('$1');"
@@ -31,7 +58,7 @@
 		"description": "Trigger an event"
 	},
 	"Bubble - Upload File": {
-		"prefix": "BJS-uploadFile",
+		"prefix": "Bubble.io uploadFile",
 		"body": [
 			"//function uplodfile callback",
 			"function uploadFileCallback(err, url) {",
@@ -58,14 +85,14 @@
 		"description": "Upload data to Bubble with optional attachment"
 	},
 	"Bubble - Strip Base64 Type": {
-		"prefix": "BJS-stripBase64Type",
+		"prefix": "Bubble.io stripBase64Type",
 		"body": [
 			"let base64Headless = $1.substr($1.indexOf(',') + 1);"
 		],
 		"description": "Removes the type from a base64 string"
 	},
 	"Bubble - Initialize States": {
-		"prefix": "BJS-initializeStates",
+		"prefix": "Bubble.io initializeStates",
 		"body": [
 			"let state = '$1'",
 			"return state;"
@@ -73,7 +100,7 @@
 		"description": "Add's a default  Initialize state syntax (EXAMPLE)"
 	},
 	"Bubble - Function run once": {
-		"prefix": "BJS-runOnceFunction",
+		"prefix": "Bubble.io runOnceFunction",
 		"body": [
 			"//Bubble - runOnce function",
 			"const ${1:runOnce}= (function() {",
@@ -99,7 +126,7 @@
 		"description": "Ensures that a function is only run once using Bubble's instance.data object"
 	},
 	"Bubble - Get progress bar value": {
-		"prefix": "BJS-progressBarValue",
+		"prefix": "Bubble.io progressBarValue",
 		"body": [
 			"//Get Bubble progress bar value",
 			"function getBubbleProgress() {",
@@ -161,7 +188,7 @@
 		"description": "Misc - Wait for an element to be created"
 	},
 	"Bubble - Publish auto binding": {
-		"prefix": "BJS-publishAutoBinding",
+		"prefix": "Bubble.io publishAutoBinding",
 		"body": [
 			"//Usage - publishAutobinding: function(value)",
 			"instance.publishAutobinding(${1:'str'});"
@@ -177,7 +204,7 @@
 		"description": "Misc - Append script"
 	},
 	"Bubble - Get Context Key": {
-		"prefix": "BJS-getContextKey",
+		"prefix": "Bubble.io getContextKey",
 		"body": [
 			"//Get Bubble Dynamic List and store in a variable",
 			"let ${1:vKey} = context.keys['${2:Key name as string}'];"
@@ -230,7 +257,7 @@
 		"description": "Get the current scroll position of the vertical repeating group"
 	},
 	"Bubble - Get Dynamic List or Array as an array of objects": {
-		"prefix": "BJS-getDynamicListArrayAsObjects",
+		"prefix": "Bubble.io getDynamicListArrayAsObjects",
 		"body": [
 			"let ${1:variableName};",
 			"properties.${2:propertyName} != null ? ${1:variableName} = properties.${2:propertyName}.get(0, properties.${2:propertyName}.length()) : ${1:variableName} = [];"
@@ -238,7 +265,7 @@
 		"description": "Bubble - Get Dynamic List or Array"
 	},
 	"Load a new keyword contrucor only once": {
-		"prefix": "BJS-NewKeywordContructor",
+		"prefix": "Bubble.io NewKeywordContructor",
 		"body": [
 		  "//Bubble Single Use New Constructor Keyword",
 		  "if (instance.data.${1:name} == undefined){",
@@ -253,7 +280,7 @@
 		"description": "Load a new keyword contrucor only once"
 	  },
 	  "Bubble - Get Dynamic List or Array using Map Function": {
-		"prefix": "BJS-GetDynamicListArrayMap",
+		"prefix": "Bubble.io GetDynamicListArrayMap",
 		"body": [
 		  "let items = []",
 		  "items = properties.${1:listName}.get( 0, properties.${1:listName}.length()).map( x => x.get(properties.${2:fieldName}) )"
@@ -261,7 +288,7 @@
 		"description": "Bubble - Get Dynamic List or Array using Map Function"
 	  },
 	  "Bubble - Get Dynamic List As Array Of Objects and cycle through": {
-		"prefix": "BJS-GetDynamicListAsObjectArray",
+		"prefix": "Bubble.io GetDynamicListAsObjectArray",
 		"body": [
 		  "//This code get the list as an object which you can then iterate over",
 		  "let objToFetch =  properties.${1:list}.get( 0, properties.${1:list}.length());",
@@ -277,7 +304,7 @@
 		"description": "Bubble - Get Dynamic List As Array Of Objects and cycle through"
 	  },
 	  "Bubble - Initalize Boilerplate": {
-		"prefix": "BJS-initalizeBoilerplate",
+		"prefix": "Bubble.io initalizeBoilerplate",
 		"body": [
 		  "  //Create unique ID of instance",
 		  "  let instanceid = (Math.random() * Math.pow(2, 54)).toString(36);",
@@ -299,7 +326,7 @@
 		"description": "Bubble - Initalize Boilerplate"
 	  },
 	  "Adds advanced internal logging": {
-		"prefix": "BJS-internalLogging",
+		"prefix": "Bubble.io internalLogging",
 		"body": [
 		  "  // Verbose logging",
 		  "  const verboseUser = context.keys['Verbose Logging'];",
@@ -316,5 +343,61 @@
 		  "  };"
 		],
 		"description": "Adds advanced internal logging"
+	  },
+	  "Reformats an object to a Bubble.io compatible type ": {
+		"prefix": "Bubble.io RemapToBubble",
+		"body": [
+		  "// Install: npm install lodash.get",
+		  "const get = require('lodash.get');",
+		  "// Install: npm install map-keys-deep-lodash",
+		  "const mapKeysDeep = require('map-keys-deep-lodash');",
+		  "",
+		  "// Cleans up the object by removing null values",
+		  "function removeEmpty(obj) {",
+		  "  return Object.keys(obj)",
+		  "    .filter(function(k) {",
+		  "      return obj[k] != null;",
+		  "    })",
+		  "    .reduce(function(acc, k) {",
+		  "      acc[k] = obj[k];",
+		  "      return acc;",
+		  "    }, {});",
+		  "}",
+		  "",
+		  "// Converts the object to a format that Bubble.io can understand",
+		  "function remapObjToBubble(objToConvert, prefixToAppend) {",
+		  "  const isObject = (val) => val && typeof val === 'object' && !Array.isArray(val);",
+		  "",
+		  "  const addDelimiter = (a, b, v) => (a ? `${a}.${b}` : b);",
+		  "",
+		  "  const paths = (obj = {}, head = '') => {",
+		  "    return Object.entries(obj).reduce((product, [key, value]) => {",
+		  "      const fullPath = addDelimiter(head, key);",
+		  "      return isObject(value) ? product.concat(paths(value, fullPath)) : product.concat(fullPath);",
+		  "    }, []);",
+		  "  };",
+		  "",
+		  "  const keys = paths(objToConvert);",
+		  "  let result = {};",
+		  "",
+		  "  // re-attach values to keys",
+		  "  keys.forEach((e) => {",
+		  "    if (e.includes('VideoURLs') || e.includes('ImageURLs')) {",
+		  "      if (get(objToConvert, e) !== null) {",
+		  "        result[e] = get(objToConvert, e);",
+		  "      } else {",
+		  "        result[e] = [];",
+		  "      }",
+		  "    } else {",
+		  "      result[e] = get(objToConvert, e);",
+		  "    }",
+		  "  });",
+		  "",
+		  "  result = mapKeysDeep(result, (value, key) => {",
+		  "    const k = prefixToAppend + key;",
+		  "    return k;",
+		  "  });"
+		],
+		"description": "Reformats an object to a Bubble.io compatible type "
 	  }
 }
